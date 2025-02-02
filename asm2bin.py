@@ -54,7 +54,6 @@ middle = ['MOVX', 'AJMP', 'ACALL', 'DJNZ', 'XCH', 'DEC', 'ADD',
 hard   = ['MOV']
 
 
-
 def op_clear(line):
 ##    1    NOP
 ##    1    RR
@@ -104,6 +103,7 @@ def op_clear(line):
         print(f'{arg2[2:4]} ', end='')
 
     print('  : ', line) if DEBUG else print()
+
 
 def op_light(line):
 ##    2    MOVC
@@ -159,6 +159,7 @@ def op_light(line):
                     print('0xC2', arg1) #f'{arg1:02X}')
 
     print('  : ', line) if DEBUG else print()
+
 
 def op_middle(line):
 ##    6    MOVX
@@ -709,11 +710,7 @@ def op_middle(line):
                         print('0x52')
                     else:
                         print('0x53', arg1, arg2[1:]) #  #0x53 --> 0x53
-#            print(linesplie)
-            pass
 
-#    print('  : ', line) if DEBUG else print()
-    pass
 
 def op_hard(line):
 ##    0xE6    1    MOV A,@R0    0    0    ''
@@ -1008,24 +1005,17 @@ def op_hard(line):
                         print('0x85', arg1, arg2) #
 
 
-
 def assembly(line):
     instruction = line.strip().split()[0]
     match instruction:
         case instruction if instruction in clear:
-            pass
-#            op_clear(line)
+            op_clear(line)
         case instruction if instruction in light:
-            pass
-#            op_light(line)
+            op_light(line)
         case instruction if instruction  in middle:
-            pass
-#            op_middle(line)
+            op_middle(line)
         case instruction if instruction in hard:
-            pass
             op_hard(line)
-
-    pass
 
 
 def main(asm_file):
@@ -1033,7 +1023,6 @@ def main(asm_file):
         for line in file:
             line = line.strip()
             assembly(line)
-    pass
 
 if __name__ == '__main__':
     main(asm_file = 'test.asm')
